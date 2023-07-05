@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import part5.SkyProHomeworks.homework_5.exeptions.EmployeeAlreadyAddedException;
 import part5.SkyProHomeworks.homework_5.exeptions.EmployeeNotFoundException;
-import part5.SkyProHomeworks.homework_5.exeptions.EmployeeStorageIsFullException;
+
+import java.util.List;
+import java.util.Map;
 
 
 @RequestMapping(path = "/employee")
@@ -14,10 +16,10 @@ import part5.SkyProHomeworks.homework_5.exeptions.EmployeeStorageIsFullException
 public class EmployeeController
 {
     final int noneDepartment = -1;
-    private final MainService mainService;
-    public EmployeeController (MainService mainService)
+    private final EmployeeService employeeService;
+    public EmployeeController (EmployeeService employeeService)
     {
-        this.mainService = mainService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping(path = "/add")
@@ -25,7 +27,7 @@ public class EmployeeController
     {
         try
         {
-            return mainService.addEmployee(firstName,lastName,department,salary).toString(true);
+            return employeeService.addEmployee(firstName,lastName,department,salary).toString(true);
         }
         catch (EmployeeAlreadyAddedException e)
         {
@@ -38,7 +40,7 @@ public class EmployeeController
     {
         try
         {
-            return mainService.deleteEmployee(firstName,lastName).toString(true);
+            return employeeService.deleteEmployee(firstName,lastName).toString(true);
         }
         catch (EmployeeNotFoundException e)
         {
@@ -50,7 +52,7 @@ public class EmployeeController
     {
         try
         {
-            return mainService.changeEmployeeSalary(firstName,lastName,salary).toString(true);
+            return employeeService.changeEmployeeSalary(firstName,lastName,salary).toString(true);
         }
         catch (EmployeeNotFoundException e)
         {
@@ -62,7 +64,7 @@ public class EmployeeController
     {
         try
         {
-            return mainService.changeEmployeeDepartment(firstName,lastName,department).toString(true);
+            return employeeService.changeEmployeeDepartment(firstName,lastName,department).toString(true);
         }
         catch (EmployeeNotFoundException e)
         {
@@ -70,34 +72,34 @@ public class EmployeeController
         }
     }
     @GetMapping(path = "/all")
-    public String printAll ()
+    public Map<Integer, List<Employee>> printAll ()
     {
-        return mainService.printAllEmployee(noneDepartment);
+        return employeeService.printAllEmployee();
     }
     @GetMapping(path = "/index")
     public String getSalaryIndex (@RequestParam("percent")  int percent)
     {
-        return mainService.getEmployeeSalaryIndex(noneDepartment,percent);
+        return employeeService.getEmployeeSalaryIndex(percent);
     }
     @GetMapping(path = "/min-salary")
     public String getMinEmployeeSalary()
     {
-        return mainService.getMinMaxEmployeeSalary(true,noneDepartment).toString(true);
+        return employeeService.getMinMaxEmployeeSalary(true).toString(true);
     }
     @GetMapping(path = "/max-salary")
     public String getMaxEmployeeSalary()
     {
-        return mainService.getMinMaxEmployeeSalary(false,noneDepartment).toString(true);
+        return employeeService.getMinMaxEmployeeSalary(false).toString(true);
     }
     @GetMapping(path = "/sum")
     public String getSalarySum()
     {
-        return mainService.getSumEmployeeSalary(noneDepartment);
+        return employeeService.getSumEmployeeSalary();
     }
     @GetMapping(path = "/avg")
     public String getSalaryAVG()
     {
-        return mainService.getAVGEmployeeSalary(noneDepartment);
+        return employeeService.getAVGEmployeeSalary();
     }
 
 }
