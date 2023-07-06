@@ -1,10 +1,7 @@
 package part5.SkyProHomeworks.homework_8;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -24,6 +21,22 @@ public class DepartmentService
         return employeeMap.values().stream()
                 .filter(dep -> dep.getDepartment() == department)
                 .collect(Collectors.toList());
+    }
+
+    public Map<Integer, List<Employee>> printAllEmployee()
+    {
+        Map<Integer,List<Employee>> sortMap = new HashMap<>();
+
+        employeeMap.values().forEach(
+                empl -> sortMap.merge(empl.getDepartment(), Collections.singletonList(empl),
+                        (prev, one) ->
+                        {
+                            List<Employee> e = new ArrayList<>(prev);
+                            e.addAll(one);
+                            return e;
+                        })
+        );
+        return sortMap;
     }
 
     public Employee getMinMaxEmployeeSalaryInDepartment (boolean isMin, int department)

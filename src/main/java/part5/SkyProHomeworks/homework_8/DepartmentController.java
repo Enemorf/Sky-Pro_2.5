@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping(path = "/departments")
 @RestController
@@ -17,10 +18,16 @@ public class DepartmentController
         this.departmentService = departmentService;
     }
 
-    @GetMapping(path = "/all")
+    @RequestMapping(path = "/all", params = "departmentId")
     public List<Employee> printAll(@RequestParam("departmentId") int department)
     {
         return departmentService.printAllInDepartment(department);
+    }
+
+    @RequestMapping(path = "/all")
+    public Map<Integer, List<Employee>> printAll ()
+    {
+        return departmentService.printAllEmployee();
     }
 
     @GetMapping(path = "/min-salary")
