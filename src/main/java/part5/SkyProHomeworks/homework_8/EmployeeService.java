@@ -1,8 +1,10 @@
 package part5.SkyProHomeworks.homework_8;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import part5.SkyProHomeworks.homework_5.exeptions.EmployeeAlreadyAddedException;
 import part5.SkyProHomeworks.homework_5.exeptions.EmployeeNotFoundException;
+import part5.SkyProHomeworks.homework_5.exeptions.InvalidInputExeprion;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,6 +24,9 @@ public class EmployeeService
         if(employeeMap.containsKey(firstName+lastName))
             throw new EmployeeAlreadyAddedException();
 
+        if(input(firstName, lastName))
+            throw new InvalidInputExeprion();
+
         Employee employee = new Employee(firstName,lastName,department,salary);
         employeeMap.put(firstName + lastName, employee);
         return employee;
@@ -32,6 +37,9 @@ public class EmployeeService
         if(!employeeMap.containsKey(firstName+lastName))
             throw new EmployeeNotFoundException();
 
+        if(input(firstName, lastName))
+            throw new InvalidInputExeprion();
+
         return employeeMap.remove(firstName+lastName);
     }
 
@@ -39,6 +47,9 @@ public class EmployeeService
     {
          if(!employeeMap.containsKey(firstName+lastName))
              throw new EmployeeNotFoundException();
+
+        if(input(firstName, lastName))
+            throw new InvalidInputExeprion();
 
          Employee employee = employeeMap.get(firstName+lastName);
          employee.setSalary(salary);
@@ -50,6 +61,9 @@ public class EmployeeService
     {
         if(!employeeMap.containsKey(firstName+lastName))
             throw new EmployeeNotFoundException();
+
+        if(input(firstName, lastName))
+            throw new InvalidInputExeprion();
 
         Employee employee = employeeMap.get(firstName+lastName);
         employee.setDepartment(department);
@@ -105,5 +119,10 @@ public class EmployeeService
            return String.valueOf( employeeMap.values().stream()
                .mapToInt(Employee::getSalary)
                .average().getAsDouble());
+   }
+
+   private boolean input (String firstName, String lastName)
+   {
+       return StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName);
    }
 }
