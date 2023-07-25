@@ -3,8 +3,8 @@ package SkyProHomeworks.homework_8;
 import SkyProHomeworks.homework_5.exeptions.InvalidInputExeprion;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import part5.SkyProHomeworks.homework_5.exeptions.EmployeeAlreadyAddedException;
-import part5.SkyProHomeworks.homework_5.exeptions.EmployeeNotFoundException;
+import SkyProHomeworks.homework_5.exeptions.EmployeeAlreadyAddedException;
+import SkyProHomeworks.homework_5.exeptions.EmployeeNotFoundException;
 
 import java.util.*;
 
