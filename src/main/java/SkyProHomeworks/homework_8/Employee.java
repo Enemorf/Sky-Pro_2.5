@@ -1,6 +1,4 @@
-package part5.SkyProHomeworks.homework_8;
-
-import org.apache.commons.lang3.StringUtils;
+package SkyProHomeworks.homework_8;
 
 import java.util.Objects;
 

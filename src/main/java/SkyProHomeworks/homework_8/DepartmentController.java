@@ -1,4 +1,4 @@
-package part5.SkyProHomeworks.homework_8;
+package SkyProHomeworks.homework_8;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

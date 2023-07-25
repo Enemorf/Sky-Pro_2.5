@@ -1,4 +1,4 @@
-package part5.SkyProHomeworks.homework_8;
+package SkyProHomeworks.homework_8;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
