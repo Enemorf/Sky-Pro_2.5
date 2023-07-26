@@ -6,25 +6,26 @@ import org.springframework.web.context.annotation.SessionScope;
 import java.util.ArrayList;
 import java.util.List;
 
-@SessionScope
 @Service
 public class StoreService
 {
-    private List<StoreObject> currOrder = new ArrayList<>();
+    private final StoreOrder storeOrder;
 
-    public int addObjectToOrder(int count)
+    public StoreService (StoreOrder storeOrder)
     {
-
-        for(int i = 0; i < count; i++)
-        {
-            currOrder.add(new StoreObject());
-        }
-        return count;
+        this.storeOrder = storeOrder;
     }
 
-    public List<StoreObject> getCurrOrder()
+    public int addObjectToOrder(int objID)
     {
-        return currOrder;
+        storeOrder.addToList(new StoreObject(objID));
+        return objID;
     }
+
+    public List<StoreObject> getOrderList()
+    {
+        return storeOrder.getCurrentOrder();
+    }
+
 
 }

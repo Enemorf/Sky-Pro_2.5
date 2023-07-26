@@ -6,13 +6,16 @@ public class StoreObject
 {
     private int objectID;
 
-    public StoreObject() {
-        Random rand = new Random();
-        this.objectID = rand.nextInt(10000);
+    public StoreObject(int objectID)
+    {
+        this.objectID = objectID;
     }
 
     public int getObjectID() {
         return objectID;
     }
 
+    public void setObjectID(int objectID) {
+        this.objectID = objectID;
+    }
 }

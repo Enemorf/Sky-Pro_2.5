@@ -20,14 +20,14 @@ public class StoreController
     }
 
     @GetMapping(path = "/add")
-    public String add (@RequestParam("count") int count)
+    public String add (@RequestParam("objID") int objID)
     {
-            return "В корзину добавлено " + storeService.addObjectToOrder(count) + " предметов!";
+            return "В корзину добавлен предмет с ID: " + storeService.addObjectToOrder(objID);
     }
 
     @GetMapping(path = "/get")
     public List<StoreObject> get()
     {
-        return storeService.getCurrOrder();
+        return storeService.getOrderList();
     }
 }
