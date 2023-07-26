@@ -22,7 +22,10 @@ public class StoreController
     @GetMapping(path = "/add")
     public String add(@RequestParam("objID") List<Integer> objectsID)
     {
-            return "В корзину добавлен(ы) предмет(ы) с ID: " + storeService.addObjectToOrder(objectsID);
+        if(objectsID.size() == 1)
+            return "В корзину добавлен предмет с ID: " + storeService.addObjectToOrder(objectsID);
+        else
+            return "В корзину добавлены предметы с ID: " + storeService.addObjectToOrder(objectsID);
     }
 
     @GetMapping(path = "/get")

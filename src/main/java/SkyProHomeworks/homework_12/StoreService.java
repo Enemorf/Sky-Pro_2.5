@@ -23,7 +23,7 @@ public class StoreService
         for(int i = 0; i < objID.size(); i++)
         {
             storeOrder.addToList(new StoreObject(objID.get(i)));
-            res = res +  objID.get(i).toString() + ", ";
+            res = res + objID.get(i).toString() + (objID.size()!=i+1?", ":".");
         }
         return res;
     }
