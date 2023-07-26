@@ -16,10 +16,16 @@ public class StoreService
         this.storeOrder = storeOrder;
     }
 
-    public int addObjectToOrder(int objID)
+    public String addObjectToOrder(List<Integer> objID)
     {
-        storeOrder.addToList(new StoreObject(objID));
-        return objID;
+        String res = "";
+
+        for(int i = 0; i < objID.size(); i++)
+        {
+            storeOrder.addToList(new StoreObject(objID.get(i)));
+            res = res +  objID.get(i).toString() + ", ";
+        }
+        return res;
     }
 
     public List<StoreObject> getOrderList()
