@@ -1,10 +1,10 @@
-package SkyProHomeworks.homework_8;
+package SkyProHomeworks.homework_14;
 
-import SkyProHomeworks.homework_5.exeptions.EmployeeAlreadyAddedException;
-import SkyProHomeworks.homework_5.exeptions.EmployeeNotFoundException;
 import SkyProHomeworks.homework_5.exeptions.InvalidInputExeprion;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import SkyProHomeworks.homework_5.exeptions.EmployeeAlreadyAddedException;
+import SkyProHomeworks.homework_5.exeptions.EmployeeNotFoundException;
 
 import java.util.*;
 
@@ -23,11 +23,19 @@ public class EmployeeService
         if(employeeMap.containsKey(firstName+lastName))
             throw new EmployeeAlreadyAddedException();
 
-        if(input(firstName, lastName))
-            throw new InvalidInputExeprion();
+//        if(input(firstName, lastName))
+//            throw new InvalidInputExeprion();
 
         Employee employee = new Employee(firstName,lastName,department,salary);
         employeeMap.put(firstName + lastName, employee);
+        return employee;
+    }
+
+    public Employee addEmployee(Employee employee)
+    {
+        if(employeeMap.containsKey(employee.getFirstName()+employee.getLastName()))
+            throw new EmployeeAlreadyAddedException();
+        employeeMap.put(employee.getFirstName()+employee.getLastName(), employee);
         return employee;
     }
 
@@ -36,8 +44,8 @@ public class EmployeeService
         if(!employeeMap.containsKey(firstName+lastName))
             throw new EmployeeNotFoundException();
 
-        if(input(firstName, lastName))
-            throw new InvalidInputExeprion();
+//        if(input(firstName, lastName))
+//            throw new InvalidInputExeprion();
 
         return employeeMap.remove(firstName+lastName);
     }
@@ -47,8 +55,8 @@ public class EmployeeService
          if(!employeeMap.containsKey(firstName+lastName))
              throw new EmployeeNotFoundException();
 
-        if(input(firstName, lastName))
-            throw new InvalidInputExeprion();
+//        if(input(firstName, lastName))
+//            throw new InvalidInputExeprion();
 
          Employee employee = employeeMap.get(firstName+lastName);
          employee.setSalary(salary);
@@ -61,8 +69,8 @@ public class EmployeeService
         if(!employeeMap.containsKey(firstName+lastName))
             throw new EmployeeNotFoundException();
 
-        if(input(firstName, lastName))
-            throw new InvalidInputExeprion();
+//        if(input(firstName, lastName))
+//            throw new InvalidInputExeprion();
 
         Employee employee = employeeMap.get(firstName+lastName);
         employee.setDepartment(department);
