@@ -1,8 +1,8 @@
-package SkyProHomeworks.homework_8;
+package SkyProHomeworks.homework_14;
 
 import java.util.Objects;
 
-import static org.apache.commons.lang3.StringUtils.capitalize;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class Employee
 {
